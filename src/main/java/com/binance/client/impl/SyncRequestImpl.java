@@ -1,6 +1,7 @@
 package com.binance.client.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.binance.client.PostOrderRequest;
 import com.binance.client.SyncRequestClient;
 import com.binance.client.model.ResponseResult;
 import com.binance.client.model.market.*;
@@ -86,12 +87,8 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
     
     @Override
-    public Order postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType,
-            TimeInForce timeInForce, String quantity, String price, String reduceOnly,
-            String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType) {
-        return RestApiInvoker.callSync(requestImpl.postOrder(symbol, side, positionSide, orderType,
-                timeInForce, quantity, price, reduceOnly, 
-                newClientOrderId, stopPrice, workingType,newOrderRespType));
+    public Order postOrder(PostOrderRequest postOrderRequest) {
+        return RestApiInvoker.callSync(requestImpl.postOrder(postOrderRequest));
     }
     
     @Override

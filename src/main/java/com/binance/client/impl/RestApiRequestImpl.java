@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.binance.client.PostOrderRequest;
 import com.binance.client.RequestOptions;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapperArray;
@@ -605,23 +606,22 @@ class RestApiRequestImpl {
         return request;
     }
 
-    RestApiRequest<Order> postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType,
-            TimeInForce timeInForce, String quantity, String price, String reduceOnly,
-            String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType) {
+    RestApiRequest<Order> postOrder(PostOrderRequest postOrderRequest) {
         RestApiRequest<Order> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
-                .putToUrl("symbol", symbol)
-                .putToUrl("side", side)
-                .putToUrl("positionSide", positionSide)
-                .putToUrl("type", orderType)
-                .putToUrl("timeInForce", timeInForce)
-                .putToUrl("quantity", quantity)
-                .putToUrl("price", price)
-                .putToUrl("reduceOnly", reduceOnly)
-                .putToUrl("newClientOrderId", newClientOrderId)
-                .putToUrl("stopPrice", stopPrice)
-                .putToUrl("workingType", workingType)
-                .putToUrl("newOrderRespType", newOrderRespType);
+                .putToUrl("symbol", postOrderRequest.getSymbol())
+                .putToUrl("side", postOrderRequest.getSide())
+                .putToUrl("positionSide", postOrderRequest.getPositionSide())
+                .putToUrl("type", postOrderRequest.getOrderType())
+                .putToUrl("timeInForce", postOrderRequest.getTimeInForce())
+                .putToUrl("quantity", postOrderRequest.getQuantity())
+                .putToUrl("price", postOrderRequest.getPrice())
+                .putToUrl("reduceOnly", postOrderRequest.getReduceOnly())
+                .putToUrl("newClientOrderId", postOrderRequest.getNewClientOrderId())
+                .putToUrl("stopPrice", postOrderRequest.getStopPrice())
+                .putToUrl("workingType", postOrderRequest.getWorkingType())
+                .putToUrl("newOrderRespType", postOrderRequest.getNewOrderRespType())
+                .putToUrl("closePosition", String.valueOf(postOrderRequest.getClosePosition()));
 
         request.request = createRequestByPostWithSignature("/fapi/v1/order", builder);
 
