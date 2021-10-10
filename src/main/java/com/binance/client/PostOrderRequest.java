@@ -87,4 +87,16 @@ public class PostOrderRequest {
     return closePosition;
   }
 
+  @Override
+  public String toString() {
+    return "PostOrderRequest{" +
+            "symbol='" + symbol + '\'' +
+            ", side=" + side +
+            ", orderType=" + orderType +
+            ", quantity='" + quantity + '\'' +
+            ", price='" + price + '\'' +
+            ", stopPrice='" + stopPrice + '\'' +
+            ", workingType=" + workingType +
+            '}';
+  }
 }
