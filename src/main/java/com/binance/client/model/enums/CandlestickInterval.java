@@ -30,4 +30,13 @@ public enum CandlestickInterval {
     public String toString() {
         return code;
     }
+
+    public static CandlestickInterval fromString(String text) {
+        for (CandlestickInterval b : CandlestickInterval.values()) {
+            if (b.code.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }
