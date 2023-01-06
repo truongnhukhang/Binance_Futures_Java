@@ -9,7 +9,7 @@ public class SubscribeCandlestickList {
     public static void main(String[] args) {
         SubscriptionClient client = SubscriptionClient.create();
 
-        client.subscribeCandlestickEvent(Arrays.asList("btcusdt","ethusdt"), CandlestickInterval.ONE_MINUTE, ((event) -> {
+        client.subscribeCandlestickEvent(Arrays.asList("btcusdt","ethusdt"), CandlestickInterval.FIVE_MINUTES, ((event) -> {
             System.out.println(event);
         }), null);
     }

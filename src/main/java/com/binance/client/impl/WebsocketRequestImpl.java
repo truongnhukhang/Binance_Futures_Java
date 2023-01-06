@@ -13,6 +13,7 @@ import com.binance.client.model.user.*;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class WebsocketRequestImpl {
 
@@ -78,9 +79,9 @@ class WebsocketRequestImpl {
     InputChecker.checker()
         .shouldNotNull(symbols, "symbol")
         .shouldNotNull(subscriptionListener, "listener");
-    request.name = "***Candlestick for [" + String.join(",", symbols) + "]***";
+    request.name = "***Candlestick for [" + symbols.stream().map(String::toLowerCase).collect(Collectors.joining(",")) + "]***";
     request.connectionHandler = (connection) -> {
-      symbols.forEach(symbol -> {
+      symbols.stream().map(String::toLowerCase).forEach(symbol -> {
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {
