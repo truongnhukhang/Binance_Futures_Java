@@ -84,6 +84,14 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
     }
 
     @Override
+    public void subscribeCandlestickEvent(List<String> symbols, CandlestickInterval interval,
+                                          SubscriptionListener<CandlestickEvent> callback, SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeCandlestickEvent(symbols,interval,callback,errorHandler)
+        );
+    }
+
+    @Override
     public void subscribeSymbolMiniTickerEvent(String symbol,
             SubscriptionListener<SymbolMiniTickerEvent> subscriptionListener, 
             SubscriptionErrorHandler errorHandler) {
