@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.model.enums.CandlestickInterval;
 
+import java.util.List;
+
 public abstract class Channels {
 
     public static final String OP_SUB = "sub";
@@ -33,6 +35,16 @@ public abstract class Channels {
         JSONObject json = new JSONObject();
         JSONArray params = new JSONArray();
         params.add(symbol + "@kline_" + interval);
+        json.put("params", params);
+        json.put("id", System.currentTimeMillis());
+        json.put("method", "SUBSCRIBE");
+        return json.toJSONString();
+    }
+
+    public static String candlestickChannel(List<String> symbols, CandlestickInterval interval) {
+        JSONObject json = new JSONObject();
+        JSONArray params = new JSONArray();
+        symbols.forEach(symbol ->params.add(symbol + "@kline_" + interval));
         json.put("params", params);
         json.put("id", System.currentTimeMillis());
         json.put("method", "SUBSCRIBE");
