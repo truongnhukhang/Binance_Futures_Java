@@ -47,6 +47,33 @@ class WebsocketRequestImpl {
         return request;
     }
 
+    WebsocketRequest<AggregateTradeEvent> subscribeAggregateTradeEvent(List<String> symbols,
+                                                                       SubscriptionListener<AggregateTradeEvent> subscriptionListener,
+                                                                       SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+                .shouldNotNull(symbols, "symbol")
+                .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<AggregateTradeEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Aggregate Trade for " + symbols.stream().map(String::toLowerCase).collect(Collectors.joining(",")) + "***";
+        request.connectionHandler = (connection) -> connection.send(Channels.aggregateTradeChannel(symbols.stream().map(String::toLowerCase).collect(Collectors.toList())));
+
+        request.jsonParser = (jsonWrapper) -> {
+            AggregateTradeEvent result = new AggregateTradeEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getLong("E"));
+            result.setSymbol(jsonWrapper.getString("s"));
+            result.setId(jsonWrapper.getLong("a"));
+            result.setPrice(jsonWrapper.getBigDecimal("p"));
+            result.setQty(jsonWrapper.getBigDecimal("q"));
+            result.setFirstId(jsonWrapper.getLong("f"));
+            result.setLastId(jsonWrapper.getLong("l"));
+            result.setTime(jsonWrapper.getLong("T"));
+            result.setIsBuyerMaker(jsonWrapper.getBoolean("m"));
+            return result;
+        };
+        return request;
+    }
+
     WebsocketRequest<MarkPriceEvent> subscribeMarkPriceEvent(String symbol,
                                                              SubscriptionListener<MarkPriceEvent> subscriptionListener,
                                                              SubscriptionErrorHandler errorHandler) {

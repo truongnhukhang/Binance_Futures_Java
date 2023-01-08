@@ -20,6 +20,16 @@ public abstract class Channels {
         json.put("method", "SUBSCRIBE");
         return json.toJSONString();
     }
+
+    public static String aggregateTradeChannel(List<String> symbols) {
+        JSONObject json = new JSONObject();
+        JSONArray params = new JSONArray();
+        symbols.forEach(symbol ->params.add(symbol + "@aggTrade"));
+        json.put("params", params);
+        json.put("id", System.currentTimeMillis());
+        json.put("method", "SUBSCRIBE");
+        return json.toJSONString();
+    }
   
     public static String markPriceChannel(String symbol) {
         JSONObject json = new JSONObject();

@@ -68,6 +68,14 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
     }
 
     @Override
+    public void subscribeAggregateTradeEvent(List<String> symbols,
+                                             SubscriptionListener<AggregateTradeEvent> subscriptionListener,
+                                             SubscriptionErrorHandler errorHandler) {
+        createConnection(
+                requestImpl.subscribeAggregateTradeEvent(symbols, subscriptionListener, errorHandler));
+    }
+
+    @Override
     public void subscribeMarkPriceEvent(String symbol,
             SubscriptionListener<MarkPriceEvent> subscriptionListener, 
             SubscriptionErrorHandler errorHandler) {

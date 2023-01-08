@@ -60,6 +60,19 @@ public interface SubscriptionClient {
             SubscriptionListener<AggregateTradeEvent> callback, SubscriptionErrorHandler errorHandler);
 
     /**
+     * Subscribe aggregate trade event. If the aggregate trade is updated,
+     * server will send the data to client and onReceive in callback will be called.
+     *
+     * @param symbols      The symbol list, like Arrays.asList("btcusdt","ethusdt).
+     * @param callback     The implementation is required. onReceive will be called
+     *                     if receive server's update.
+     * @param errorHandler The error handler will be called if subscription failed
+     *                     or error happen between client and Binance server.
+     */
+    void subscribeAggregateTradeEvent(List<String> symbols,
+                                      SubscriptionListener<AggregateTradeEvent> callback, SubscriptionErrorHandler errorHandler);
+
+    /**
      * Subscribe mark price event. If the mark price is updated,
      * server will send the data to client and onReceive in callback will be called.
      *
