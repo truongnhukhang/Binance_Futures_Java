@@ -3,14 +3,24 @@ package com.binance.client.model.market;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 import java.math.BigDecimal;
 
+import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
+import static java.time.format.DateTimeFormatter.ISO_INSTANT;
+
 public class ExchangeInfoEntry {
 
     private String symbol;
+
+    private Long deliveryDate;
+
+    private Long onboardDate;
 
     private String status;
 
@@ -140,6 +150,22 @@ public class ExchangeInfoEntry {
         this.filters = filters;
     }
 
+    public Long getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(Long deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public Long getOnboardDate() {
+        return onboardDate;
+    }
+
+    public void setOnboardDate(Long onboardDate) {
+        this.onboardDate = onboardDate;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol)
@@ -148,6 +174,9 @@ public class ExchangeInfoEntry {
                 .append("quoteAsset", quoteAsset).append("pricePrecision", pricePrecision)
                 .append("quantityPrecision", quantityPrecision).append("baseAssetPrecision", baseAssetPrecision)
                 .append("quotePrecision", quotePrecision).append("orderTypes", orderTypes)
-                .append("timeInForce", timeInForce).append("filters", filters).toString();
+                .append("timeInForce", timeInForce).append("filters", filters)
+                .append("deliveryDate", ISO_DATE_TIME.format(Instant.ofEpochMilli(deliveryDate).atZone(ZoneId.of("UTC"))))
+                .append("onboardDate", ISO_DATE_TIME.format(Instant.ofEpochMilli(deliveryDate).atZone(ZoneId.of("UTC"))))
+                .toString();
     }
 }
