@@ -197,7 +197,7 @@ class RestApiRequestImpl {
                 ExchangeInfoEntry symbol = new ExchangeInfoEntry();
                 symbol.setSymbol(item.getString("symbol"));
                 symbol.setDeliveryDate(item.getLong("deliveryDate"));
-                symbol.setDeliveryDate(item.getLong("onboardDate"));
+                symbol.setOnboardDate(item.getLong("onboardDate"));
                 symbol.setStatus(item.getString("status"));
                 symbol.setMaintMarginPercent(item.getBigDecimal("maintMarginPercent"));
                 symbol.setRequiredMarginPercent(item.getBigDecimal("requiredMarginPercent"));
