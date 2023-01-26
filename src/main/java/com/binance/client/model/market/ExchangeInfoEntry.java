@@ -46,6 +46,16 @@ public class ExchangeInfoEntry {
 
     private List<List<Map<String, String>>> filters;
 
+    private List<String> underlyingSubType;
+
+    public List<String> getUnderlyingSubType() {
+        return underlyingSubType;
+    }
+
+    public void setUnderlyingSubType(List<String> underlyingSubType) {
+        this.underlyingSubType = underlyingSubType;
+    }
+
     public String getSymbol() {
         return symbol;
     }
