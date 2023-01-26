@@ -11,7 +11,17 @@ public enum PeriodType {
     _4h("4h"),
     _6h("6h"),
     _12h("12h"),
-    _1d("1d");
+    _1d("1d"),
+    n_5m("MINUTE_5"),
+    n_15m("MINUTE_15"),
+    n_30m("MINUTE_30"),
+    n_1h("HOUR_1"),
+    n_2h("HOUR_2"),
+    n_4h("HOUR_4"),
+    n_6h("HOUR_6"),
+    n_8h("HOUR_8"),
+    n_12h("HOUR_12"),
+    n_1d("DAY_1");
 
     private final String code;
 

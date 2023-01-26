@@ -51,6 +51,17 @@ public class WebSocketConnection extends WebSocketListener {
         log.info("[Sub] Connection [id: " + this.connectionId + "] created for " + request.name);
     }
 
+    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog, boolean autoClose, String url) {
+        this.connectionId = WebSocketConnection.connectionCounter++;
+        this.request = request;
+        this.autoClose = autoClose;
+
+        this.okhttpRequest = new Request.Builder().url(url).build();
+        this.watchDog = watchDog;
+        log.info("[Sub] Connection [id: " + this.connectionId + "] created for " + request.name);
+
+    }
+
     int getConnectionId() {
         return this.connectionId;
     }
