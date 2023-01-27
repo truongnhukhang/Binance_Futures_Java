@@ -2,6 +2,12 @@ package com.binance.client.model.enums;
 
 import com.binance.client.impl.utils.EnumLookup;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.Period;
+import java.time.chrono.ChronoPeriod;
+import java.time.temporal.ChronoUnit;
+
 public enum PeriodType {
     _5m("5m"),
     _15m("15m"),

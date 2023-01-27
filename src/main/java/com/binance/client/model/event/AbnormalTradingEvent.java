@@ -84,4 +84,18 @@ public class AbnormalTradingEvent {
     public void setSendTimeStamp(long sendTimeStamp) {
         this.sendTimeStamp = sendTimeStamp;
     }
+
+    @Override
+    public String toString() {
+        return "AbnormalTradingEvent{" +
+                "symbol='" + symbol + '\'' +
+                ", noticeType=" + noticeType +
+                ", noticeEventType=" + noticeEventType +
+                ", priceChange=" + priceChange +
+                ", period=" + period +
+                ", baseAsset='" + baseAsset + '\'' +
+                ", quotaAsset='" + quotaAsset + '\'' +
+                ", sendTimeStamp=" + sendTimeStamp +
+                '}';
+    }
 }

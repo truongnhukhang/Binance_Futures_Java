@@ -4,9 +4,9 @@ import com.binance.client.impl.utils.EnumLookup;
 
 public enum NoticeEventType {
     UP_1("up_1"),
-    UP_BREAK_THROUGH("up_break_through"),
+    UP_BREAKTHROUGH("up_breakthrough"),
     DOWN_1("down_1"),
-    DOWN_BREAK_THROUGH("down_break_through"),
+    DOWN_BREAKTHROUGH("down_breakthrough"),
     DROP_BACK("drop_back"),
     RISE_AGAIN("rise_again"),
     ;

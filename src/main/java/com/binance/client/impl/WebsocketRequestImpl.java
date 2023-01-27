@@ -6,6 +6,9 @@ import com.binance.client.impl.utils.Channels;
 import com.binance.client.impl.utils.JsonWrapper;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.model.enums.CandlestickInterval;
+import com.binance.client.model.enums.NoticeEventType;
+import com.binance.client.model.enums.NoticeType;
+import com.binance.client.model.enums.PeriodType;
 import com.binance.client.model.event.*;
 import com.binance.client.model.market.OrderBookEntry;
 import com.binance.client.model.user.*;
@@ -581,6 +584,26 @@ class WebsocketRequestImpl {
                 result.setOrderUpdate(orderUpdate);
             }
 
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<AbnormalTradingEvent> subscribeAbnormalTradingEvent(SubscriptionListener<AbnormalTradingEvent> subscriptionListener,
+                                                                         SubscriptionErrorHandler errorHandler) {
+        WebsocketRequest<AbnormalTradingEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.connectionHandler = null;
+        request.jsonParser = (jsonWrapper) -> {
+            AbnormalTradingEvent result = new AbnormalTradingEvent();
+            JsonWrapper data = jsonWrapper.getJsonObject("data");
+            result.setBaseAsset(data.getString("baseAsset"));
+            result.setNoticeEventType(NoticeEventType.lookup(data.getString("eventType")));
+            result.setNoticeType(NoticeType.lookup(data.getString("noticeType")));
+            result.setPeriod(PeriodType.lookup(data.getString("period")));
+            result.setPriceChange(data.getDouble("priceChange"));
+            result.setQuotaAsset(data.getString("quotaAsset"));
+            result.setSendTimeStamp(data.getLong("sendTimestamp"));
+            result.setSymbol(data.getString("symbol"));
             return result;
         };
         return request;
