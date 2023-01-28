@@ -27,7 +27,8 @@ public enum PeriodType {
     n_6h("HOUR_6"),
     n_8h("HOUR_8"),
     n_12h("HOUR_12"),
-    n_1d("DAY_1");
+    n_1d("DAY_1"),
+    n_1w("WEEK_1");
 
     private final String code;
 
